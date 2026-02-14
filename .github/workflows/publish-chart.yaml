@@ -22,7 +22,7 @@ jobs:
 
       - name: Package and Push
         run: |
-          CHART_NAME="webservice"
+          CHART_NAME="webservice-chart"
           # Get version from Chart.yaml
           VERSION=$(grep 'version:' ./charts/$CHART_NAME/Chart.yaml | awk '{print $2}')
           
