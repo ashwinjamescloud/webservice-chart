@@ -4,7 +4,7 @@ on:
   push:
     branches: [ "main" ]
     paths:
-      - 'charts/**'
+      - '/**'
   workflow_dispatch: # Manual trigger
 
 jobs:
@@ -24,10 +24,10 @@ jobs:
         run: |
           CHART_NAME="webservice"
           # Get version from Chart.yaml
-          VERSION=$(grep 'version:' ./charts/$CHART_NAME/Chart.yaml | awk '{print $2}')
+          VERSION=$(grep 'version:' ./$CHART_NAME/Chart.yaml | awk '{print $2}')
           
           # Package chart into a .tgz file
-          helm package ./charts/$CHART_NAME
+          helm package ./$CHART_NAME
           
           # Push to OCI registry in ACR
           helm push ${CHART_NAME}-${VERSION}.tgz oci://${{ secrets.ACR_LOGIN_SERVER }}/helm
